@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block content %}
+<canvas id="premium-bg-canvas"></canvas>
+
+<div class="container my-5 py-4 position-relative" style="z-index: 2;">
+
+    <div class="row justify-content-center text-center mb-5" data-aos="fade-down">
+        <div class="col-lg-8">
+            <h1 class="display-4 fw-black text-uppercase tracking-wider text-white mb-3">
+                Our <span class="neon-text-purple">Story</span>
+            </h1>
+            <p class="lead fw-bold mx-auto" style="max-width: 600px; font-size: 1.1rem; letter-spacing: 0.5px;">
+                AromaMatch არის სივრცე, სადაც ხელოვნება, ფილოსოფია და პარფიუმერია ერთმანეთს ერწყმის, რათა იპოვო შენი უნიკალური სურნელოვანი იდენტობა.
+            </p>
+            <hr class="mx-auto my-4 shadow-pulse" style="width: 80px; border-top: 3px solid #a855f7; opacity: 1;">
+        </div>
+    </div>
+
+    <div class="row align-items-center g-5 mb-5 py-4">
+        <div class="col-md-6" data-aos="fade-right">
+            <div class="backend-info-row ps-4 mb-4">
+                <span class="text-muted small d-block text-uppercase fw-semibold tracking-wider mb-1">ვინ ვართ ჩვენ</span>
+                <h2 class="fw-bold text-white">სურნელის არჩევა თვითგამოხატვაა</h2>
+            </div>
+            <p class="text-secondary lh-lg mb-4">
+                ჩვენ გვჯერა, რომ სურნელი არ არის უბრალოდ აქსესუარი — ის არის უხილავი აურა, რომელიც შენს განწყობას, ხასიათსა და შინაგან სამყაროს გადმოსცემს. AromaMatch შეიქმნა იმისთვის, რომ დაგეხმაროს ამ რთულ, მაგრამ ამაღელვებელ მოგზაურობაში.
+            </p>
+            <p class="text-secondary lh-lg">
+                ჩვენი პლატფორმა აერთიანებს მსოფლიოს წამყვან ნიშ და კლასიკურ არომატებს, გთავაზობს მათ ღრმა ანალიზს და გეხმარება ზუსტად იმ პარფიუმის პოვნაში, რომელიც შენი ცხოვრების ახალ თავად იქცევა.
+            </p>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-left">
+            <div class="premium-glow-card p-5 text-center position-relative overflow-hidden">
+                <div class="abstract-bg-glow"></div>
+                <i class="bi bi-wind display-1 text-purple-glow mb-4 d-block"></i>
+                <h4 class="fw-bold text-white text-uppercase mb-2">The Perfect Match</h4>
+                <p class="fw-bold small px-3">ყოველი ნოტი, ყოველი შლეიფი საგულდაგულოდ არის შესწავლილი და მორგებული შენს გემოვनेशनზე.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="value-card h-100 p-4">
+                <div class="icon-box mb-3">
+                    <i class="bi bi-gem"></i>
+                </div>
+                <h5 class="fw-bold text-white mb-2">Premium Quality</h5>
+                <p class="fw-bold small lh-base mb-0">მხოლოდ ორიგინალური, უმაღლესი ხარისხის ბრენდები და ექსკლუზიური ნიშ პარფიუმერია.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="value-card h-100 p-4">
+                <div class="icon-box mb-3">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+                <h5 class="fw-bold text-white mb-2">Smart Matching</h5>
+                <p class="fw-bold small lh-base mb-0">ინოვაციური მიდგომა არომატების შერჩევისას, რომელიც ითვალისწინებს შენს ინდივიდუალიზმს.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="value-card h-100 p-4">
+                <div class="icon-box mb-3">
+                    <i class="bi bi-heart"></i>
+                </div>
+                <h5 class="fw-bold text-white mb-2">Passion Driven</h5>
+                <p class="fw-bold small lh-base mb-0">ჩვენ არ ვყიდით უბრალოდ პროდუქტს, ჩვენ გაზიარებთ პარფიუმერული ხელოვნების სიყვარულს.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* 🌌 ფონის ტილო მთელ ეკრანზე */
+    #premium-bg-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; /* კონტენტის უკან თავსდება */
+        background-color: #08080a; /* მუქი პრემიუმ ბაზისი */
+        pointer-events: all;
+    }
+
+    .fw-black { font-weight: 900; }
+    .tracking-wider { letter-spacing: 2px; }
+
+    .neon-text-purple {
+        color: #c084fc;
+        text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+    }
+
+    .text-purple-glow {
+        color: #c084fc;
+        filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+    }
+
+    @keyframes linePulse {
+        0% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.4); }
+        50% { box-shadow: 0 0 20px rgba(235, 113, 255, 0.8); }
+        100% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.4); }
+    }
+    .shadow-pulse {
+        animation: linePulse 2s infinite ease-in-out;
+    }
+
+    .backend-info-row {
+        border-left: 3px solid #a855f7;
+        box-shadow: -5px 0 10px -5px rgba(168, 85, 247, 0.5);
+    }
+
+    /* შუშის ეფექტიანი ბარათები (Glassmorphism), რომ ფონი ლამაზად ჩანდეს მათ უკან */
+    .premium-glow-card {
+        background-color: rgba(17, 17, 21, 0.75);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(168, 85, 247, 0.25) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .premium-glow-card:hover {
+        border-color: rgba(235, 113, 255, 0.6) !important;
+        box-shadow: 0 15px 40px rgba(168, 85, 247, 0.35);
+        transform: translateY(-5px);
+    }
+
+    .abstract-bg-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    .value-card {
+        background-color: rgba(17, 17, 21, 0.75);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        transition: all 0.3s ease-in-out;
+    }
+    .value-card:hover {
+        background-color: rgba(20, 20, 26, 0.85);
+        border-color: rgba(168, 85, 247, 0.4);
+        box-shadow: 0 10px 25px rgba(168, 85, 247, 0.25);
+        transform: translateY(-3px);
+    }
+
+    .icon-box {
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(235, 113, 255, 0.05));
+        border: 1px solid rgba(168, 85, 247, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #c084fc;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+    .value-card:hover .icon-box {
+        background: linear-gradient(135deg, #a855f7, #eb71ff);
+        color: #fff;
+        box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        border-color: transparent;
+    }
+</style>
+
+<script>
+    const canvas = document.getElementById('premium-bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // 4K დაცვა — ადაპტაცია ეკრანის რეზოლუციაზე
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // მაუსის კოორდინატები
+    let mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    // ნაწილაკის (მოლეკულის) კლასი
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2.5 + 0.5; // ზომა
+            this.speedX = Math.random() * 0.4 - 0.2; // ძალიან ნელი, ელეგანტური მოძრაობა
+            this.speedY = Math.random() * 0.4 - 0.2;
+            this.density = (Math.random() * 20) + 20;
+        }
+
+        update() {
+            // ბუნებრივი მოძრაობა
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            // ეკრანიდან გასვლისას მობრუნება
+            if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+            if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+
+            // მაუსთან ინტერაქცია (ნელი მიზიდვა/ბიძგი "სურნელის" ეფექტისთვის)
+            if (mouse.x != null && mouse.y != null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= dx * force * 0.03;
+                    this.y -= dy * force * 0.03;
+                }
+            }
+        }
+
+        draw() {
+            ctx.fillStyle = 'rgba(192, 132, 252, 0.45)'; // ნეონის იასამნისფერი ნაწილაკები
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+
+    // მასივის შევსება
+    const particlesArray = [];
+    const numberOfParticles = Math.min(80, (canvas.width * canvas.height) / 25000); // ოპტიმიზებული რაოდენობა
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+    }
+
+    // ხაზების გაბმა მოლეკულებს შორის (ქსელის ეფექტი)
+    function connectParticles() {
+        let opacityValue = 1;
+        for (let a = 0; a < particlesArray.length; a++) {
+            for (let b = a; b < particlesArray.length; b++) {
+                let dx = particlesArray[a].x - particlesArray[b].x;
+                let dy = particlesArray[a].y - particlesArray[b].y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 120) {
+                    opacityValue = 1 - (distance / 120);
+                    ctx.strokeStyle = `rgba(168, 85, 247, ${opacityValue * 0.12})`; // ნაზი იასამნისფერი ხაზები
+                    ctx.lineWidth = 0.8;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    // ანიმაციის ციკლი
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        connectParticles();
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+{% endblock %}

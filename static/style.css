@@ -1,0 +1,25 @@
+.custom-navbar {
+    /* შენი ორიგინალური იასამნისფერი ფონი და ნაზი ჩრდილი */
+    background-color: rgba(208, 187, 227, 0.95) !important;
+    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.4) !important;
+
+    /* 15 პიქსელზე მომრგვალება და ზემოდან დაშორება მცურავი ეფექტისთვის */
+    border-radius: 15px !important;
+    margin-top: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    /* ანიმაციის დრო ეფექტის რბილად გადასვლისთვის */
+    transition: box-shadow 0.23s ease-in-out;
+}
+
+/* როცა მაუსს მივიტანთ ნავბართან, ჩაირთვება შენი ნეონის იასამნისფერი განათება */
+.custom-navbar:hover {
+    box-shadow: 0 0 25px 4px rgb(235 113 255 / 0.9) !important;
+}
+.carousel-img {
+    width: 100%;
+    /* height-ს საერთოდ ვაშლით! */
+    aspect-ratio: 16 / 9;   /* <- აი ეს არის ჯადოსნური ხაზი! ის კარუსელს რეალურად ჰორიზონტალურს გახდის */
+    object-fit: cover;
+    object-position: center;
+}

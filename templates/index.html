@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero-section d-flex align-items-center justify-content-center text-center" style="height: 90vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=1974&auto=format&fit=crop') center/cover; color: white;">
+    <div data-aos="fade-up">
+        <h1 class="display-3 fw-bold">Find Your Perfect Match</h1>
+        <p class="lead">აღმოაჩინე შენი სურნელი წამყვანი მსოფლიო ბრენდებისგან</p>
+        <a href="#best-sellers" class="btn btn-outline-light btn-lg mt-3">Explore Now</a>
+    </div>
+</div>
+
+<div id="best-sellers" class="container my-5 py-5">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold text-uppercase" style="letter-spacing: 2px;">Best Sellers</h2>
+        <p class="text-muted">Popular brands available right now</p>
+        <hr class="mx-auto" style="width: 80px; border-top: 2px solid #000;">
+
+        {% if role == 'Admin' %}
+            <button class="btn btn-success my-3 rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm">
+                + Add New Fragrance
+            </button>
+
+            <div class="collapse text-start mx-auto p-4 border bg-white shadow-sm my-3" id="addProductForm" style="max-width: 500px;">
+                <form action="{{ url_for('main.add_product') }}" method="POST">
+                    <div class="mb-2"><input type="text" name="name" class="form-control rounded-0" placeholder="Product Name" required></div>
+                    <div class="mb-2"><input type="text" name="brand" class="form-control rounded-0" placeholder="Brand" required></div>
+                    <div class="mb-2"><input type="number" step="0.01" name="price" class="form-control rounded-0" placeholder="Price ($)" required></div>
+                    <div class="mb-2"><input type="text" name="category" class="form-control rounded-0" placeholder="Category (Men/Women/Unisex)"></div>
+                    <div class="mb-2"><textarea name="description" class="form-control rounded-0" placeholder="Description"></textarea></div>
+                    <div class="mb-2"><input type="number" name="stock" class="form-control rounded-0" placeholder="Stock Count" required></div>
+                    <div class="mb-2"><input type="text" name="image" class="form-control rounded-0" placeholder="Image Filename (e.g., azzaro.jpg)"></div>
+                    <button type="submit" class="btn btn-dark w-100 rounded-0">Save Product</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row justify-content-center">
+
+        {# Jinja-ს ციკლი: მოაქვს ბაზაში არსებული პროდუქტები #}
+        {% for product in products %}
+        <div class="col-md-3 col-sm-6 mb-4" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+            <div class="card h-100 border-0 shadow-sm text-center perfume-card">
+                <div class="p-3 bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+<img src="{{ url_for('static', filename='images/' + (product.image or 'default.png')) }}" class="img-fluid" style="max-height: 200px; object-fit: contain;" alt="{{ product.name }}">                </div>
+                <div class="card-body d-flex flex-column justify-content-between p-3">
+                    <div>
+                        <p class="text-muted text-uppercase small mb-1 fw-bold">{{ product.brand }}</p>
+                        <h6 class="card-title fw-bold text-dark mb-2">{{ product.name }}</h6>
+                    </div>
+                    <div>
+                        <p class="card-text text-danger fw-bold mb-3">${{ product.price }}</p>
+                        <a href="#" class="btn btn-dark btn-sm w-100 rounded-0 mb-2">VIEW DETAILS</a>
+
+                        {% if role == 'Admin' %}
+                            <div class="d-flex gap-1 mt-2">
+                                <a href="{{ url_for('main.edit_product', id=product.id) }}" class="btn btn-warning btn-sm w-50 rounded-0">Edit</a>
+                                <a href="{{ url_for('main.delete_product', id=product.id) }}" class="btn btn-danger btn-sm w-50 rounded-0" onclick="return confirm('ნამდვილად გსურთ წაშლა?')">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<style>
+    .timeline-section {
+        background-color: #0b0b0c; /* ღრმა მუქი ფონი, რომ ნეონმა მაქსიმალურად ინათოს */
+        color: #fff;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 0;
+    }
+
+    /* 🟣 ხაზი (The String) — Juicy Neon Glow ეფექტით */
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background: #a855f7;
+        top: 0;
+        bottom: 0;
+        left: 40px;
+        margin-left: -2px;
+        box-shadow: 0 0 15px #a855f7, 0 0 30px #d8b4fe, 0 0 45px #a855f7;
+    }
+
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 100%;
+        margin-bottom: 50px;
+        padding-left: 90px;
+    }
+
+    /* 🟣 ნეონის წრეები 1, 2, 3 ციფრებით */
+    .timeline-number {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 15px;
+        top: 15px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7c3aed, #a855f7);
+        color: white;
+        border: 3px solid #0b0b0c;
+        text-align: center;
+        line-height: 44px;
+        font-weight: bold;
+        font-size: 20px;
+        z-index: 1;
+        box-shadow: 0 0 20px #a855f7, 0 0 35px #7c3aed;
+    }
+
+    /* 🟣 ბარათები მარჯვნივ */
+    .timeline-content {
+        padding: 25px 30px;
+        background-color: #16161a;
+        position: relative;
+        border-radius: 12px;
+        border-left: 5px solid #a855f7;
+        box-shadow: 0 10px 30px rgba(168, 85, 247, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-content {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(168, 85, 247, 0.25);
+        border-left: 5px solid #c084fc;
+    }
+</style>
+
+<div id="contact-section" class="timeline-section py-5 mt-5">
+    <div class="container">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold text-uppercase" style="color: #c084fc; text-shadow: 0 0 15px rgba(168,85,247,0.6); letter-spacing: 2px;">How to Reach Us</h2>
+            <p class="text-muted">გამოჰყევი ხაზს ჩვენს დასაკავშირებლად</p>
+            <hr class="mx-auto" style="width: 80px; border-top: 2px solid #a855f7; box-shadow: 0 0 10px #a855f7;">
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-number" data-aos="zoom-in">1</div>
+                <div class="timeline-content" data-aos="fade-left">
+                    <h4 class="fw-bold" style="color: #e9d5ff;">საკონტაქტო ინფორმაცია</h4>
+                    <p class="fw-bold mb-1"><i class="bi bi-geo-alt-fill me-2" style="color: #a855f7;"></i> თბილისი, საქართველო</p>
+                    <p class="fw-bold mb-1"><i class="bi bi-telephone-fill me-2" style="color: #a855f7;"></i> +995 555 XX XX XX</p>
+                    <p class="fw-bold"><i class="bi bi-envelope-fill me-2" style="color: #a855f7;"></i> info@aromamatch.ge</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number" data-aos="zoom-in">2</div>
+                <div class="timeline-content" data-aos="fade-left">
+                    <h4 class="fw-bold" style="color: #e9d5ff;">სამუშაო საათები</h4>
+                    <p class="fw-bold mb-1"><strong class="text-white">ორშაბათი - პარასკევი:</strong> 10:00 - 20:00</p>
+                    <p class="fw-bold mb-1"><strong class="text-white">შაბათი:</strong> 11:00 - 18:00</p>
+                    <p class="fw-bold"><strong class="text-white">კვირა:</strong> დასვენება</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number" data-aos="zoom-in">3</div>
+                <div class="timeline-content" data-aos="fade-left">
+                    <h4 class="fw-bold" style="color: #e9d5ff;">მოგვწერეთ შეტყობინება</h4>
+                    <p class="fw-bold mb-3">დაგვიტოვეთ თქვენი კითხვა პირდაპირ აქედან.</p>
+                    <form>
+                        <div class="mb-2">
+                            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary rounded-0" placeholder="თქვენი იმეილი" required>
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control form-control-sm bg-dark text-white border-secondary rounded-0" rows="3" placeholder="შეტყობინება..." required></textarea>
+                        </div>
+                        <button type="button" class="btn btn-sm w-100 rounded-0" style="background-color: #a855f7; color: white; box-shadow: 0 0 15px #a855f7; font-weight: bold;">გაგზავნა</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

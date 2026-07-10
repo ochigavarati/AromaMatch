@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* 🔮 AURORA BACKGROUND */
+    body {
+        background: linear-gradient(45deg, #07050f, #12071f, #050508, #1a0b2e) !important;
+        background-size: 400% 400% !important;
+        animation: auroraFlow 18s ease infinite !important;
+        color: #f3f4f6 !important;
+        overflow-x: hidden;
+    }
+
+    @keyframes auroraFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .detail-glass-card {
+        background-color: rgba(10, 10, 14, 0.75) !important;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(168, 85, 247, 0.2) !important;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    }
+
+    .product-img-container {
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.15);
+    }
+
+    .neon-text-purple {
+        color: #c084fc;
+        text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-back {
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #f3f4f6;
+        transition: all 0.3s ease;
+    }
+    .btn-back:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+</style>
+
+<div class="container my-5 py-5">
+    <div class="mb-4" data-aos="fade-down">
+        <a href="{{ url_for('main.perfumes') }}" class="btn btn-back px-4 rounded-pill small">
+            <i class="bi bi-arrow-left me-2"></i>უკან დაბრუნება
+        </a>
+    </div>
+
+    <div class="detail-glass-card p-4 p-md-5" data-aos="fade-up">
+        <div class="row g-5 align-items-center">
+
+            <div class="col-lg-5">
+                <div class="product-img-container bg-dark">
+                    <img src="{{ url_for('static', filename='images/' + (product.image or 'default.png')) }}"
+                         alt="{{ product.name }}"
+                         class="img-fluid w-100"
+                         style="max-height: 450px; object-fit: contain; padding: 20px;">
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <span class="badge bg-dark border border-purple text-purple-light px-3 py-2 rounded-pill small text-uppercase mb-3">
+                    {{ product.category }}
+                </span>
+
+                <h1 class="display-6 fw-bold text-white mb-1">{{ product.name }}</h1>
+
+                <h4 class="text-muted fw-semibold mb-4">Brand: <span class="neon-text-purple">{{ product.brand or 'N/A' }}</span></h4> 
+
+                <div class="d-flex align-items-center mb-4">
+                    <span class="text-muted me-3 fs-5">Price:</span>
+                    <span class="display-6 fw-bold text-white" style="color: #e9d5ff !important;">
+                        ${{ product.price }}
+                    </span>
+                </div>
+
+                <hr style="border-top: 1px solid rgba(168, 85, 247, 0.2);">
+
+                <div class="my-4">
+                    <h5 class="text-white fw-bold mb-3"><i class="bi bi-file-text me-2 text-purple"></i>Description</h5>
+                    <p class="text-muted lh-lg" style="font-size: 1.05rem;">
+                        {{ product.description or 'ამ პროდუქტზე აღწერა ჯერ არ არის დამატებული.' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-12">
+                <hr style="border-top: 1px solid rgba(168, 85, 247, 0.25); margin-bottom: 40px;">
+
+                <div class="row g-4">
+                    <div class="col-md-5">
+                        <div class="admin-glass-card p-4" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(168, 85, 247, 0.15); border-radius: 16px;">
+                            <h4 class="text-white mb-2 fw-bold"><i class="bi bi-star-fill text-purple me-2"></i>შეფასებები</h4>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <h2 class="display-6 fw-bold text-white mb-0 me-3">{{ avg_rating or '0.0' }}</h2>
+                                <div>
+                                    <div class="text-warning small">
+                                        Rating: {{ avg_rating or '0.0' }} / 5
+                                    </div>
+                                    <small class="text-muted">ეფუძნება {{ reviews|length }} შეფასებას</small>
+                                </div>
+                            </div>
+
+                            {% if g.user %}
+                                <form action="{{ url_for('main.add_review', product_id=product.id) }}" method="POST">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small fw-bold text-uppercase">შეაფასე სუნამო</label>
+                                        <select name="rating" class="form-select text-white bg-dark border-secondary" required style="background-color: rgba(15,15,25,0.8) !important;">
+                                            <option value="5">⭐⭐⭐⭐⭐ (5 - საუკეთესო)</option>
+                                            <option value="4">⭐⭐⭐⭐ (4 - ძალიან კარგი)</option>
+                                            <option value="3">⭐⭐⭐ (3 - ნორმალური)</option>
+                                            <option value="2">⭐⭐ (2 - არ მომეწონა)</option>
+                                            <option value="1">⭐ (1 - საშინელი)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small fw-bold text-uppercase">შენი კომენტარი</label>
+                                        <textarea name="comment" class="form-control text-white bg-dark border-secondary" rows="4" placeholder="გაგვიზიარე შენი შთაბეჭდილება ამ სუნამოზე..." required style="background-color: rgba(15,15,25,0.8) !important;"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-purple-neon w-100 py-2 fw-bold text-uppercase" style="background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; border-radius: 8px;">
+                                        გაგზავნა
+                                    </button>
+                                </form>
+                            {% else %}
+                                <div class="text-center p-3 rounded" style="background: rgba(255,255,255,0.05); border: 1px dashed rgba(168,85,247,0.3)">
+                                    <p class="small text-muted mb-2">შეფასების დასაწერად საჭიროა ავტორიზაცია.</p>
+                                    <a href="{{ url_for('main.login') }}" class="btn btn-sm btn-outline-purple text-white px-3" style="border-color: #a855f7; text-decoration: none;">შესვლა</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="admin-glass-card p-4 h-100 overflow-auto" style="max-height: 480px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(168, 85, 247, 0.15); border-radius: 16px;">
+                            <h5 class="text-white mb-4 fw-bold">ბოლო გამოხმაურებები</h5>
+
+                            {% if reviews %}
+                                {% for review in reviews %}
+                                    <div class="p-3 mb-3 rounded-3" style="background: rgba(20, 20, 28, 0.6); border-left: 3px solid #a855f7;">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="fw-semibold text-white small"><i class="bi bi-person me-1 text-purple"></i>{{ review.author.username if review.author else 'სტუმარი' }}</span>
+                                            <small class="text-muted" style="font-size: 0.75rem;">
+                                                {% if review.date_posted %}
+                                                    {{ review.date_posted.strftime('%d %b, %Y') }}
+                                                {% endif %}
+                                            </small>
+                                        </div>
+
+                                        <div class="text-warning small mb-2" style="font-size: 0.8rem;">
+                                            შეფასება: {{ review.rating }} / 5 ⭐
+                                        </div>
+
+                                        <p class="text-purple-light small mb-0" style="line-height: 1.5; color: #e9d5ff;">{{ review.text }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="text-center py-5 text-muted">
+                                    <i class="bi bi-chat-left-heart display-5 d-block mb-2 text-purple" style="opacity: 0.4; color: #a855f7;"></i>
+                                    ამ სუნამოზე შეფასება ჯერ არ დაწერილა. იყავი პირველი! ✨
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

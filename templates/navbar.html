@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-lg custom-navbar" style="background-color: rgba(208, 187, 227, 0.95) !important;">    <div class="container-md">
+        <a class="navbar-brand d-flex align-items-center" href="https://www.tbcbank.ge/web/ka/web/guest/tbc-education" target="_blank">
+            <img src="https://images.eu.ctfassets.net/psnuheg7hu1m/2naQr5wRk6zwV8nxO2EgFf/debc16ae60c6dd82b8d83b74863a80dc/tbcge-logo.svg" alt="TBC Logo" height="30" class="me-2 bg-white p-1 rounded">
+            <span class="fw-bold text-dark">AromaMatch</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-medium" href="{{ url_for('main.index') }}">მთავარი</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-medium" href="{{ url_for('main.perfumes') }}">სუნამოები</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-medium" href="/about_us">ჩვენს შესახებ</a>
+                </li>
+                {% if role == "Admin" %}
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold" href="#">პროდუქტის დამატება</a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <div class="d-flex gap-2">
+                <a href="#" class="btn btn-outline-dark btn-sm px-3 fw-medium">შესვლა</a>
+                <a href="#" class="btn btn-outline-dark btn-sm px-3 fw-medium">რეგისტრაცია</a>
+            </div>
+        </div>
+    </div>
+</nav>

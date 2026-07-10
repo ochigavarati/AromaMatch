@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5 py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5" data-aos="fade-up">
+
+            <div class="card border-0 shadow-lg p-4 text-white" style="background-color: #111115; border-radius: 15px; border: 1px solid rgba(168, 85, 247, 0.2) !important;">
+
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold text-uppercase" style="color: #c084fc; text-shadow: 0 0 10px rgba(168, 85, 247, 0.4); letter-spacing: 1px;">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </h3>
+                    <p class="text-muted small">შედი შენს პროფილში ექსკლუზიურ სურნელებზე წასასვლელად</p>
+                    <hr class="mx-auto my-2" style="width: 50px; border-top: 2px solid #a855f7;">
+                </div>
+
+                <form method="post">
+                    {{ form.hidden_tag() }} <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Username</label>
+                        {{ form.username(class="form-control bg-dark text-white border-secondary rounded-0 py-2", placeholder="შეიყვანე იუზერნეიმი") }}
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-semibold text-muted">Password</label>
+                        {{ form.password(class="form-control bg-dark text-white border-secondary rounded-0 py-2", placeholder="შეიყვანე პაროლი") }}
+                    </div>
+
+                    <div class="mt-2">
+                        {{ form.submit(class="btn btn-purple w-100 rounded-0 py-2 fw-bold text-uppercase", style="background-color: #a855f7; border-color: #a855f7; color: white; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); letter-spacing: 1px;") }}
+                    </div>
+
+                </form>
+
+                <div class="text-center mt-4 pt-2 border-top border-secondary border-opacity-25">
+                    <p class="small text-muted mb-0">ახალი ხარ? <a href="/register" style="color: #c084fc; text-decoration: none;">შექმენი ანგარიში</a></p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        background-color: #1a1a24 !important;
+        color: #fff !important;
+        border-color: #a855f7 !important;
+        box-shadow: 0 0 10px rgba(168, 85, 247, 0.4) !important;
+    }
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.3) !important;
+    }
+</style>
+{% endblock %}
