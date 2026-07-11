@@ -14,7 +14,6 @@ class Product(db.Model):
     stock = db.Column(db.Integer, default=0)
     image = db.Column(db.String(255), default="default.jpg")
 
-    # გასწორდა: კლასის სახელი "Comment" მხოლობითშია
     comments = db.relationship("Comment", backref="product", lazy=True, cascade="all, delete-orphan")
 
 
@@ -31,7 +30,6 @@ class User(db.Model):
     image = db.Column(db.String(255), default="default.jpg")
     is_admin = db.Column(db.Boolean, default=False)
 
-    # გასწორდა: კლასის სახელი "Comment" მხოლობითშია
     comments = db.relationship("Comment", backref="author", lazy=True)
 
 
@@ -41,7 +39,6 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
 
-    # 🚨 სახელს ვუცვლით text-ად, რადგან SQLite ჯიუტად ამ სვეტს ეძებს ბაზაში!
     text = db.Column(db.Text, nullable=False)
 
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)

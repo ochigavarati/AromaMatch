@@ -1,5 +1,5 @@
 <style>
-    /* მთავარი კონტეინერი */
+
     .timeline {
         position: relative;
         max-width: 800px;
@@ -7,21 +7,19 @@
         padding: 20px 0;
     }
 
-    /* 🟣 ხაზი (The String) — ახლა უკვე ანათებს იასამნისფრად */
+
     .timeline::after {
         content: '';
         position: absolute;
         width: 4px;
-        background: #a855f7; /* ძირითადი იასამნისფერი */
+        background: #a855f7;
         top: 0;
         bottom: 0;
         left: 40px;
         margin-left: -2px;
-        /* JUICY NEON GLOW ეფექტი ხაზისთვის */
         box-shadow: 0 0 10px #a855f7, 0 0 20px #d8b4fe, 0 0 30px #a855f7;
     }
 
-    /* თითოეული ბლოკის კონტეინერი */
     .timeline-item {
         padding: 10px 40px;
         position: relative;
@@ -31,7 +29,6 @@
         padding-left: 90px;
     }
 
-    /* 🟣 წრეები ნომრებით (1, 2, 3) — იასამნისფერი ნათებით და ბექგრაუნდით */
     .timeline-number {
         position: absolute;
         width: 50px;
@@ -39,7 +36,7 @@
         left: 15px;
         top: 15px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #7c3aed, #a855f7); /* გრადიენტიანი იასამნისფერი */
+        background: linear-gradient(135deg, #7c3aed, #a855f7);
         color: white;
         border: 3px solid #fff;
         text-align: center;
@@ -47,30 +44,25 @@
         font-weight: bold;
         font-size: 20px;
         z-index: 1;
-        /* მძლავრი Glow ეფექტი წრეებისთვის */
         box-shadow: 0 0 15px #a855f7, 0 0 25px #7c3aed, inset 0 0 5px rgba(255,255,255,0.5);
     }
 
-    /* 🟣 ტექსტის ბარათები მარჯვნივ — იასამნისფერი მარცხენა ჩარჩოთი */
     .timeline-content {
         padding: 25px 30px;
         background-color: #ffffff;
         position: relative;
         border-radius: 12px;
-        /* მარცხენა ხაზი პროდუქტებზე */
         border-left: 5px solid #a855f7;
         box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
         transition: all 0.3s ease;
     }
 
-    /* როცა იუზერი ბარათზე მაუსს მიიტანს, ნათება ძლიერდება */
     .timeline-item:hover .timeline-content {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15);
         border-left: 5px solid #7c3aed;
     }
 
-    /* თაიმლაინის სათაურის ნეონ ტექსტი */
     .glow-text {
         color: #222;
         transition: text-shadow 0.5s ease;

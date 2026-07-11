@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, PasswordField, RadioField, FloatField, DateField, SelectField, \
     SubmitField, FileField,TextAreaField
-# 🎯 დარწმუნდი, რომ ბოლოში უწერია Optional
 from wtforms.validators import DataRequired, Email, Length, Optional
 from choices import COUNTRIES
 from choices import CATEGORIES
@@ -35,7 +34,7 @@ class ProductForm(FlaskForm):
                                                 ("unisex", "Unisex")])  # ან რაც გიწერია ქოისებში
     description = TextAreaField("Description")
 
-    # 📦 აი ეს აკლდა შენს ფორმას! ჩაამატე სურათის ველის მაღლა ან დაბლა
+
     stock = IntegerField("Stock (რაოდენობა)",
                          validators=[DataRequired(), NumberRange(min=0, message="მარაგი 0-ზე ნაკლები ვერ იქნება")])
 

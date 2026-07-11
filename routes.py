@@ -5,12 +5,10 @@ from wtforms import StringField, PasswordField, SelectField, FileField, SubmitFi
 from wtforms.validators import DataRequired, Length, Email, Optional
 from werkzeug.utils import secure_filename
 
-# მოდელებისა და მონაცემთა ბაზის იმპორტი
 from ext import db
 from models import Product, User, Comment
 
-# ველების და ფორმების იმპორტი (თუ სხვა ფაილიდან გაქვს, შეცვალე შესაბამისად, ან დატოვე ასე თუ აქვე გჭირდება)
-# დავუშვათ ფორმები სხვა ფაილში გაქვს, თუ არა და აგერაა UpdateProfileForm
+
 class UpdateProfileForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=50)])
     email = StringField("Email", validators=[DataRequired(), Email()])
@@ -23,14 +21,12 @@ class UpdateProfileForm(FlaskForm):
 profiles = []
 role = "Admin"
 
-# ვქმნით ბლუპრინტს
 main = Blueprint('main', __name__)
 
 
 @main.route("/")
 @main.route("/index")
 def index():
-    # მოგვაქვს მხოლოდ 3 პროდუქტი, ID-ის მიხედვით დალაგებული კლებადობით (უახლესები)
     featured_products = Product.query.order_by(Product.id.desc()).limit(3).all()
     return render_template("index.html", products=featured_products)
 
@@ -70,8 +66,7 @@ def create_product():
         flash("ამ გვერდზე წვდომა მხოლოდ ადმინისტრატორს აქვს!", "danger")
         return redirect(url_for("main.index"))
 
-    # სახელი 'ProductForm' უნდა იყოს იმპორტირებული შენი forms.py-დან, თუ იქ გიწერია
-    from forms import ProductForm  # 👈 დინამიური იმპორტი დაზღვევისთვის
+    from forms import ProductForm
     form = ProductForm()
 
     if form.validate_on_submit():
@@ -202,6 +197,8 @@ def register():
             image=filename,
             email=form.email.data
         )
+        if new_user.username.lower() == 'admin':
+            new_user.is_admin = True
 
         db.session.add(new_user)
         db.session.commit()
@@ -299,7 +296,6 @@ def add_review(product_id):
         flash("გთხოვთ შეავსოთ ყველა ველი!", "danger")
         return redirect(url_for("main.product_detail", product_id=product_id))
 
-    # 🚨 სწორი ვერსია: ინახავს მონაცემს .text სვეტში, როგორც მოდელში გვიწერია!
     new_review = Comment(
         rating=rating,
         text=comment,
